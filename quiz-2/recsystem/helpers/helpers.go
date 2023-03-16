@@ -4,8 +4,6 @@ import (
 	"html/template"
 	"log"
 	"net/http"
-
-	
 )
 
 // See a web page

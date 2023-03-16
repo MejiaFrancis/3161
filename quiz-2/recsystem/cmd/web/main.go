@@ -12,7 +12,7 @@ import (
 	"time"
 
 	"github.com/MejiaFrancis/3161/3162/quiz-2/recsystem/internal/models"
-	
+
 	_ "github.com/jackc/pgx/v5/stdlib"
 )
 

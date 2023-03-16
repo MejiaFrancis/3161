@@ -1,10 +1,11 @@
 package main
 
 import (
+	"log"
 	"net/http"
-	//"strconv"
 
 	"github.com/MejiaFrancis/3161/3162/quiz-2/recsystem/helpers"
+	//"strconv"
 )
 
 // include --about
@@ -57,8 +58,17 @@ func (app *application) MessageCreate(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "bad request", http.StatusBadRequest)
 		return
 	}
-	the_question := r.PostForm.Get("new_question")
-	_, err = app.user.Insert(the_question)
+	email := r.PostForm.Get("email")
+	first_name := r.PostForm.Get("first_name")
+	age := r.PostForm.Get("age")
+	last_name := r.PostForm.Get("last_name")
+	address := r.PostForm.Get("address")
+	phone_number := r.PostForm.Get("phone_number")
+	roles_id := r.PostForm.Get("roles_id")
+	password := r.PostForm.Get("password")
+	log.Printf("%s %s %s %s %s %s %s %d %t\n", email, first_name, last_name, age, address, phone_number, roles_id, password)
+	userid, err := app.user.Insert(email, first_name, last_name, age, address, phone_number, roles_id, password)
+	log.Printf("%s %s %s %s %s %s %s %s %d\n", email, first_name, last_name, age, address, phone_number, roles_id, password, userid)
 	if err != nil {
 		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
 		return
