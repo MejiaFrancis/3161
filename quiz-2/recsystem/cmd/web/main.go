@@ -1,5 +1,4 @@
-// greeting    greeting
-// Welcome to my page this is my main.go
+// main.go
 package main
 
 import (
@@ -11,65 +10,62 @@ import (
 	"os"
 	"time"
 
-	"github.com/MejiaFrancis/3161/3162/quiz-2/recsystem/internal/models"
-
 	_ "github.com/jackc/pgx/v5/stdlib"
+	"github.com/sirraymondarzu/3162/internal/models" // this will be change to file from another folder models
 )
 
-// create a new type
+// Share data across our handlers
+
 type application struct {
-	user models.UserModel
-	//responses models.ResponseModel
-	//options models.OptionsModel
+	reservations models.ReservationModel
+	login        models.LoginModel
 }
 
 func main() {
-	// Create a flag for specifiying the port number \
-	// when starting the server
-	addr := flag.String("port", ":4000", "HTTP network address")
-	dsn := flag.String("dsn", os.Getenv("RECSYSTEM_DB_DSN"), "PlstgreSQL DSN")
+	// configure our server
+	addr := flag.String("addr", ":4000", "HTTP network address")
+	dsn := flag.String("dsn", os.Getenv("RCSYSTEM_DB_DSN"), "PostgreSQL DSN (Data Source Name)")
 	flag.Parse()
 
-	// Create an instance of the connection pool
+	// get a database connection pool
 	db, err := openDB(*dsn)
 	if err != nil {
-		log.Println(err)
+		log.Print(err)
 		return
 	}
-	// create an instance of the application type
+
+	// share data across our handlers
 	app := &application{
-		user: models.UserModel{DB: db},
-		//responses: models.ResponseModel{DB: db},
-		//options: models.OptionsModel{DB: db},
+		reservations: models.ReservationModel{DB: db},
+		login:        models.LoginModel{DB: db},
 	}
-
+	// cleanup the connection pool
 	defer db.Close()
-	// acquired a  database connection pool
+	// acquired a database connection pool
 	log.Println("database connection pool established")
-	// create customized server
-	log.Printf("Start server on port %s", *addr)
+	// create and start a custom web server
+	log.Printf("starting server on %s", *addr)
 	srv := &http.Server{
-		Addr:    *addr,
-		Handler: app.routes(),
-		//IdleTimeout:  time.Minute,
-		//ReadTimeout:  5 * time.Second,
-		//WriteTimeout: 10 * time.Second,
+		Addr:         *addr,
+		Handler:      app.routes(),
+		IdleTimeout:  time.Minute,
+		ReadTimeout:  5 * time.Second,
+		WriteTimeout: 10 * time.Second,
 	}
-
 	err = srv.ListenAndServe()
-	log.Fatal(err) //should not reach here
+	log.Fatal(err)
 }
 
-// Get a database connection pool
+// The openDB() function returns a database connection pool or error
 func openDB(dsn string) (*sql.DB, error) {
 	db, err := sql.Open("pgx", dsn)
 	if err != nil {
 		return nil, err
 	}
-	// use a context to check if the DB is reachable
-	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second) //always to this
-	defer cancel()                                                          // then this to clean up
-	// let's ping the DB
+	// create a context
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	// test the DB connection
 	err = db.PingContext(ctx)
 	if err != nil {
 		return nil, err
