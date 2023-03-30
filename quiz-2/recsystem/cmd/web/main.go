@@ -10,8 +10,8 @@ import (
 	"os"
 	"time"
 
+	"github.com/MejiaFrancis/3161/3162/quiz-2/recsystem/internal/models" // this will be change to file from another folder models
 	_ "github.com/jackc/pgx/v5/stdlib"
-	"github.com/sirraymondarzu/3162/internal/models" // this will be change to file from another folder models
 )
 
 // Share data across our handlers

@@ -2,7 +2,7 @@
 package main
 
 import (
-	"github.com/sirraymondarzu/3162/internal/models"
+	"github.com/MejiaFrancis/3161/3162/quiz-2/recsystem/internal/models"
 )
 
 type templateData struct {
