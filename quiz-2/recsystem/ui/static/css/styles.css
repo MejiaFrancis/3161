@@ -1,0 +1,16 @@
+form label {
+    display: block;
+}
+
+.registration_form form div {
+    margin: 15px;
+    
+}
+.buttonleft{display: flex;
+    justify-content: flex-end;}
+
+
+.registration_form {
+    max-width: 168px;
+    padding: 5px;
+}
