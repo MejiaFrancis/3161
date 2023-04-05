@@ -27,6 +27,8 @@ func main() {
 	dsn := flag.String("dsn", os.Getenv("RCSYSTEM_DB_DSN"), "PostgreSQL DSN (Data Source Name)")
 	flag.Parse()
 
+	
+
 	// get a database connection pool
 	db, err := openDB(*dsn)
 	if err != nil {

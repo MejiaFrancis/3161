@@ -1,4 +1,4 @@
-INSERT INTO equipment (name, equipment_type_id, status, availability)
+INSERT INTO equipments (name, equipment_type_id, status, availability)
 VALUES 
 ('Cable Crossover', 3, true, true),
 ('Barbell Rack', 4, true, true),
