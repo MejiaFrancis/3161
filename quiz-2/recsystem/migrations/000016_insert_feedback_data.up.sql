@@ -17,9 +17,9 @@ VALUES
 (15, 5, 'Great gym, would recommend to anyone.', '2023-04-01 16:00:00'),
 (16, 3, 'The gym could use more mirrors and stretching space.', '2023-04-01 18:15:00'),
 (17, 4, 'I appreciate the discounts offered for students and military members.', '2023-04-01 19:45:00'),
-(18, 5, 'The equipment is always in good condition.', '2023-04-01 21:00:00'),
-(19, 2, 'The gym was very busy and I had to wait a long time for equipment.', '2023-04-01 22:30:00'),
-(20, 4, 'The classes are always challenging and fun.', '2023-04-02 07:00:00'),
-(21, 5, 'I love the variety of equipment offered.', '2023-04-02 08:30:00'),
-(22, 3, 'The gym could use more cardio equipment.', '2023-04-02 10:00:00'),
-(23, 2, 'The staff was unhelpful and unfriendly.', '2023-04-02 11:45:00');
+(1, 5, 'The equipment is always in good condition.', '2023-04-01 21:00:00'),
+(11, 2, 'The gym was very busy and I had to wait a long time for equipment.', '2023-04-01 22:30:00'),
+(2, 4, 'The classes are always challenging and fun.', '2023-04-02 07:00:00'),
+(5, 5, 'I love the variety of equipment offered.', '2023-04-02 08:30:00'),
+(8, 3, 'The gym could use more cardio equipment.', '2023-04-02 10:00:00'),
+(13, 2, 'The staff was unhelpful and unfriendly.', '2023-04-02 11:45:00');
