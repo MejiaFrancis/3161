@@ -2,8 +2,7 @@
 CREATE TABLE IF NOT EXISTS equipment_usage_log (
   equipment_usage_log_id bigserial PRIMARY KEY,
   equipments_id bigserial NOT NULL REFERENCES "equipments" ("equipments_id"),
-  user_id bigserial NOT NULL REFERENCES "users" ("users_id"), 
-  logs_id bigserial,
+  logs_id bigserial NOT NULL REFERENCES "logs" ("logs_id") ,
   time_borrowed TIMESTAMP(0) WITH TIME ZONE NOT NULL DEFAULT NOW(),
   returned_status boolean NOT NULL
 );
