@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en" class="h-100">
+
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <title>Login</title>
+
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+   <!-- Custom styles for this template -->
+   <link href="../css/styles.css" rel="stylesheet">
+   <style>
+      body {
+         overflow: hidden;
+         height: 100%;
+      }
+
+      main {
+         /* height: 0%; */
+         height: 110%;
+         position: relative;
+         left: 0;
+         top: 0;
+         width: 100%;
+         height: 100%;
+      }
+
+      div.container {
+         max-width: 600px;
+      }
+
+      .first-heading {
+         margin-top: 80px;
+      }
+
+      .star-rating {
+         user-select: none;
+      }
+
+      .star {
+         font-size: 3rem;
+         color: #ff9800;
+         background-color: unset;
+         border: none;
+
+      }
+
+      .star:hover {
+         cursor: pointer;
+      }
+
+      .h-40 {
+         height: 40px;
+      }
+   </style>
+</head>
+
+<body class="">
+   <main class="">
+      <nav class="p-0 navbar navbar-expand-lg">
+         <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+               <img src="../images/UB-Logo.png" alt="" width="80">
+               <span>RC SLS</span>
+            </a>
+         </div>
+      </nav>
+      <a href="../index.html" class="back-button">
+         <img src="../images/extras/back-button.svg" alt="">
+      </a>
+
+      <form ><button class="logout-button">Logout</button></form>
+      <br>
+      <h6 class="first-heading text-dark">Share your Feedback</h6>
+      <br>
+      <br>
+      <div class="mb-2 container d-fex justify-content-center flex-column align-items-center nowrap">
+         <form>
+            <!--Row 1-->
+
+            <div class="col-lg-12 text-start text-nowrap ">
+               <label for="rating" class="form-label m-0">Rate your experiences</label>
+            </div>
+
+            <div class=" star-rating text-start text-nowrap d-flex justify-content-between">
+               <label class="star">&#9734;</label>
+               <label class="star">&#9734;</label>
+               <label class="star">&#9734;</label>
+               <label class="star">&#9734;</label>
+               <label class="star">&#9734;</label>
+            </div>
+
+            <script>
+               const allStars = document.querySelectorAll('.star');
+               allStars.forEach((star, i) => {
+                  star.onclick = function () {
+                     let current_star_level = i + 1;
+                     allStars.forEach((star, j) => {
+                        if (current_star_level >= j + 1) {
+                           star.innerHTML = '&#9733';  //pain star if its equal to selcted star
+                        } else {
+                           star.innerHTML = '&#9734';
+                        }
+                     })
+                  }
+               })
+            </script>
+
+            <!--2 Row-->
+            <div class="row nowrap mt-3 text-start">
+               <div class="col-sm-12">
+                  <label for="subject" class="form-label">Subject</label>
+                  <input type="text" class="form-control" id="notes" placeholder="Subject">
+               </div>
+            </div>
+
+            <!--3 Row-->
+            <div class="row nowrap mt-3 text-start">
+               <div class="col-sm-12">
+                  <label for="message" class="form-label">Message</label>
+                  <textarea class="form-control" placeholder="Leave a message here" id="floatingTextarea2"
+                     style="height: 100px"></textarea>
+               </div>
+
+               <div class="text-center">
+                  <button type="submit" class="mt-4">Submit</button>
+               </div>
+
+         </form>
+      </div>
+   </main>
+   <footer></footer>
+
+</body>
+
+</html>

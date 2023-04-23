@@ -1,0 +1,114 @@
+*{
+   box-sizing: border-box;
+}
+
+html{
+   height: 100%;
+}
+
+body{
+   height: 100%;
+   overflow: hidden;
+   overflow-y: auto;
+}
+
+h2{
+   font-weight: bold;
+   font-size: 1.2em;
+}
+
+h6 {
+   color: #902C8C;
+}
+
+.navbar-brand > span{
+   border-left: 2px solid #FFC72C;
+   padding-left: 10px;
+   color:  black;
+}
+
+.navbar-brand{
+   font-size: 2em;
+   margin: 0 auto;
+}
+
+main{
+   text-align: center;
+}
+
+div.container{
+   width: 80%;
+}
+
+main>div{
+   height: 100%;
+}
+
+button{
+   background-color: #902C8C;
+   color: #fff;
+   border-radius: 10px;
+   font-size: 1em;
+   border: 0px;
+   width: 100px;
+   padding: 5px;
+}
+
+button:hover{
+   background-color: #FFB919;
+}
+
+      
+.logout-button{
+   font-size: 0.8em;
+   position: absolute;
+   right: 20px;
+   top: 13%;
+}
+
+.back-button{
+   font-size: 1em;
+   position: absolute;
+   left: 30px;
+   top: 13%;
+}
+
+.skip-button{
+   position: absolute;
+   left: 50%;
+   bottom: 20%;
+   -webkit-transform: translateX(-50%);
+   transform: translateX(-50%)
+}
+
+
+
+footer{
+   width: 100%;
+   height: 5%;
+   background-color: #902C8C;
+   position: fixed;
+   bottom: 0;
+}
+
+
+.box{
+   border: 1px solid #902C8C;
+   background-color: rgb(245, 245, 245);
+   color: black;
+   font-size: 1em;
+}
+
+.btn-submit, .btn-skip{
+   color: #fff;
+   background-color: #902C8C;
+   border-color: #902C8C;
+   border-radius: 12px;
+}
+
+
+.logout-button:hover, .skip-button:hover, .btn-submit:hover{
+   background-color: #FFB919;
+   border-color: #FFB919;
+   color: #fff;
+}

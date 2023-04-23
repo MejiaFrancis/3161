@@ -1,0 +1,76 @@
+
+<!doctype html>
+<html lang="en" class="h-100">
+
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <title>Login</title>
+
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+   <script type="text/javascript" src="../jquery/js/jquery-1.9.0.min.js"></script>
+   <script type="text/javascript" src="../jquery/js/jquery-ui-1.10.0.custom.min.js"></script>
+
+   <!-- Custom styles for this template -->
+   <link href="../css/styles.css" rel="stylesheet">
+   <style>
+      h1 {
+         text-transform: uppercase;
+      }
+
+      body,
+      main {
+         overflow: hidden !important;
+         overflow-y: auto !important;
+      }
+
+      .scannerbox {
+         overflow: auto;
+         max-width: 400px;
+      }
+
+      footer {
+         width: 100%;
+      }
+   </style>
+</head>
+
+<body class="">
+   <nav class="p-0 navbar navbar-expand-lg">
+      <div class="container-fluid">
+         <a class="navbar-brand" href="#">
+            <img src="../images/UB-Logo.png" alt="" width="80">
+            <span>RC SLS</span>
+         </a>
+      </div>
+   </nav>
+   <a href="./scanoption.html" class="back-button">
+      <img src="../images/extras/back-button.svg" alt="">
+   </a>
+   <form action="../functions/func.logout." method="post"><button class="logout-button" name="logoutButton">Logout</button></form>
+   <main class="pt-5">
+      <div class="container-fluid pt-4 ">
+         <h6 class="text-dark">Scan QR Code</h6>
+         <h6 class="pb-4">Position camera on the code</h6>
+         <div class="scannerbox container d-flex flex-column justify-content-center mb-5">
+            <div class="row col-lg-12 justify-content-center">
+               <div class="col-lg-12">
+                  <div id="reader"></div>
+               </div>
+            </div>
+            <div class="row col-lg-12 ">
+               <div class="col-lg-12" style="padding:30px;">
+                  <h4>SCAN RESULT</h4>
+                  <div id="result">Result Here</div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </main>
+   <footer></footer>
+   <script src="../js/html5-qrcode.min.js"></script>
+</body>
+
+</html>
