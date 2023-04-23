@@ -4,6 +4,7 @@ package models
 import (
 	"context"
 	"database/sql"
+	"fmt"
 	"time"
 )
 
@@ -14,6 +15,7 @@ type Equipment struct {
 	Image             string
 	Equipment_type_id int
 	Status            bool
+	Availability      bool
 	CreatedAt         time.Time
 }
 
@@ -44,8 +46,7 @@ func (m *EquipmentModel) Get() (*Equipment, error) {
 }
 
 // Creating an Insert Method that will post users entered into the database
-func (m *EquipmentModel) Insert(name string, image string, equipment_type_id int, status bool) (int64, error) {
-	var id int64
+func (m *EquipmentModel) Insert(name string, image string, equipment_type_id int, status bool, availability bool) (int64, error) {
 
 	statement := `
 	INSERT INTO equipment (name, image, equipment_type_id, status, availability)
@@ -135,3 +136,4 @@ func (m *EquipmentModel) Return(equip_id int64) (int64, error) {
 		return 0, err
 	}
 	return id, nil
+}

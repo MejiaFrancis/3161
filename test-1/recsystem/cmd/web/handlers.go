@@ -74,3 +74,49 @@ func (app *application) MessageCreate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 }
+
+// create handler for login
+func (app *application) Login(w http.ResponseWriter, r *http.Request) {
+
+	RenderTemplates(w, "./ui/static/html/home.page.tmpl")
+
+}
+
+// create handler for LoginSubmit
+func (app *application) LoginSubmit(w http.ResponseWriter, r *http.Request) {
+
+	RenderTemplates(w, "./ui/static/html/home.page.tmpl")
+
+}
+
+// create handler for SignIn
+func (app *application) SignIn(w http.ResponseWriter, r *http.Request) {
+
+	RenderTemplates(w, "./ui/static/html/home.page.tmpl")
+
+}
+
+// create handler for SignInSubmit
+func (app *application) SignInSubmit(w http.ResponseWriter, r *http.Request) {
+
+	RenderTemplates(w, "./ui/static/html/home.page.tmpl")
+
+}
+
+// create handler for ScanQrCode
+func (app *application) ScanQrCode(w http.ResponseWriter, r *http.Request) {
+
+	RenderTemplates(w, "./ui/static/html/home.page.tmpl")
+
+}
+
+func RenderTemplates(w http.ResponseWriter, s string) {
+	panic("unimplemented")
+}
+
+// create handler for ScanQrCodeSubmit
+func (app *application) ScanQrCodeSubmit(w http.ResponseWriter, r *http.Request) {
+
+	RenderTemplates(w, "./ui/static/html/home.page.tmpl")
+
+}
