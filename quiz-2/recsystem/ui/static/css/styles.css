@@ -1,16 +1,29 @@
-form label {
-    display: block;
+.back{
+    background-color: gold;
 }
 
-.registration_form form div {
-    margin: 15px;
-    
+.box{
+    background: rgba(0, 0, 0, .5);
+    padding: 25px;
+    border-radius: 5px;
 }
-.buttonleft{display: flex;
-    justify-content: flex-end;}
 
+.cen{
+    width: 100%; 
+    height: 100%; display: flex; 
+    justify-content: center; 
+    align-items: center;
+}
 
-.registration_form {
-    max-width: 168px;
-    padding: 5px;
+.field-icon {
+    float: right;
+    margin-left: -25px;
+    margin-top: -25px;
+    position: relative;
+    z-index: 2;
+  }
+
+html, body{
+    margin: 0;
+    height: 100%;
 }
