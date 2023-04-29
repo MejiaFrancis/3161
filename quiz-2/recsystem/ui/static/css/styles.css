@@ -27,3 +27,21 @@ html, body{
     margin: 0;
     height: 100%;
 }
+/* Begin point for registration form */
+form label {
+    display: block;
+}
+
+.registration_form form div {
+    margin: 15px;
+    
+}
+.buttonleft{display: flex;
+    justify-content: flex-end;}
+
+
+.registration_form {
+    max-width: 168px;
+    padding: 5px;
+}
+/* End point for registration form */
