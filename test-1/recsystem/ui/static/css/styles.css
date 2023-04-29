@@ -44,5 +44,6 @@ form label {
 .registration_form {
     max-width: 168px;
     padding: 5px;
+    color: whitesmoke;
 }
 /*End registration form*/
