@@ -27,10 +27,11 @@ html, body{
     margin: 0;
     height: 100%;
 }
+/*Begin registration form*/
 form label {
     display: block;
 }
-/*Begin registration form*/
+
 
 .registration_form form div {
     margin: 15px;
