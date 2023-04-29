@@ -19,23 +19,63 @@ func (app *application) loginform(w http.ResponseWriter, r *http.Request) {
 
 }
 
+//loginformSubmit
+
+func (app *application) loginformSubmit(w http.ResponseWriter, r *http.Request) {
+	RenderTemplate(w, "login.page.tmpl", nil)
+
+}
+
 func (app *application) register(w http.ResponseWriter, r *http.Request) {
 	RenderTemplate(w, "register.page.tmpl", nil)
 
 }
+
+//registerSubmit
+
+func (app *application) registerSubmit(w http.ResponseWriter, r *http.Request) {
+	RenderTemplate(w, "register.page.tmpl", nil)
+
+}
+
 func (app *application) reserve(w http.ResponseWriter, r *http.Request) {
 	RenderTemplate(w, "reservation.page.tmpl", nil)
 
 }
+
+//reserveFormSubmit
+
+func (app *application) reserveFormSubmit(w http.ResponseWriter, r *http.Request) {
+	RenderTemplate(w, "reservation.page.tmpl", nil)
+
+}
+
 func (app *application) userPortal(w http.ResponseWriter, r *http.Request) {
 	RenderTemplate(w, "userPortal.page.tmpl", nil)
 
 }
+
+//userPortalFormSubmit
+func (app *application) userPortalFormSubmit(w http.ResponseWriter, r *http.Request) {
+	RenderTemplate(w, "userPortal.page.tmpl", nil)
+
+}
+
 func (app *application) adminPortal(w http.ResponseWriter, r *http.Request) {
 	RenderTemplate(w, "adminPortal.page.tmpl", nil)
 
 }
+func (app *application) adminPortalFormSubmit(w http.ResponseWriter, r *http.Request) {
+	RenderTemplate(w, "adminPortal.page.tmpl", nil)
+
+}
 func (app *application) feedback(w http.ResponseWriter, r *http.Request) {
+	RenderTemplate(w, "feedback.page.tmpl", nil)
+
+}
+
+//feedbackFormSubmit
+func (app *application) feedbackFormSubmit(w http.ResponseWriter, r *http.Request) {
 	RenderTemplate(w, "feedback.page.tmpl", nil)
 
 }
