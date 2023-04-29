@@ -47,3 +47,10 @@ form label {
     color: whitesmoke;
 }
 /*End registration form*/
+
+/*About page*/
+
+section div{
+    margin-top: 14px;
+    margin-bottom: 14px;
+}
