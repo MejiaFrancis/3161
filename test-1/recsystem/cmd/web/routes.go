@@ -21,6 +21,7 @@ func (app *application) routes() http.Handler {
 	router.Handler(http.MethodGet, "/about", dynamicMiddleware.ThenFunc(app.about))
 	router.Handler(http.MethodGet, "/login", dynamicMiddleware.ThenFunc(app.loginform))
 	router.Handler(http.MethodPost, "/login", dynamicMiddleware.ThenFunc(app.loginformSubmit))
+	router.Handler(http.MethodPost, "/logout", dynamicMiddleware.ThenFunc(app.logout))
 	router.Handler(http.MethodGet, "/register", dynamicMiddleware.ThenFunc(app.register))
 	router.Handler(http.MethodPost, "/register", dynamicMiddleware.ThenFunc(app.registerSubmit))
 	router.Handler(http.MethodGet, "/reservation", dynamicMiddleware.ThenFunc(app.reserve))
