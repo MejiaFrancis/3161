@@ -15,6 +15,11 @@ type EquipmentType struct {
 	TypeName string // Equipment type name
 }
 
+// Setup dependency injection
+type EquipmentTypeModel struct {
+	DB *sql.DB
+}
+
 // InsertEquipmentType inserts an equipment type into the PostgreSQL database
 func InsertEquipmentType(typeName string) error {
 	// Connect to PostgreSQL database

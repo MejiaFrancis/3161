@@ -21,6 +21,11 @@ type EquipmentUsageLog struct {
 	ReturnedStatus bool      // Status of equipment return (true if returned, false if not)
 }
 
+// Setup dependency injection
+type EquipmentUsageLogModel struct {
+	DB *sql.DB
+}
+
 // InsertEquipmentUsageLog inserts an equipment usage log entry into the PostgreSQL database
 func InsertEquipmentUsageLog(equipmentID, userID int, logID int, timeBorrowed, timeReturned time.Time, returnedStatus bool) error {
 	// Connect to PostgreSQL database

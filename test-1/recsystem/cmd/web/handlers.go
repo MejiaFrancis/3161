@@ -1,11 +1,11 @@
 package main
 
 import (
+	"errors"
 	"log"
 	"net/http"
 
-	"github.com/MejiaFrancis/3161/3162/test-1/recsystem/helpers"
-	//"strconv"
+	"gibhub.com/MejiaFrancis/3161/3162/test-1/recsystem/internal/models"
 )
 
 // include --about
@@ -13,7 +13,7 @@ import (
 // create handler for greeting
 func (app *application) Greeting(w http.ResponseWriter, r *http.Request) {
 
-	helpers.RenderTemplates(w, "./static/html/poll.page.tmpl")
+	RenderTemplates(w, "./static/html/poll.page.tmpl")
 	//RenderTemplate(w, "home.page.tmpl", nil)
 	// w.Write([]byte("Welcome to my page."))
 	//question, err := app.question.Get()
@@ -75,24 +75,82 @@ func (app *application) MessageCreate(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func (app *application) userSignup(w http.ResponseWriter, r *http.Request) {
+	// remove the entry from the session manager
+	flash := app.sessionManager.PopString(r.Context(), "flash")
+	data := &templateData{
+		Flash: flash,
+	}
+	RenderTemplate(w, "signup.page.tmpl", data)
+}
+
+func (app *application) userSignupSubmit(w http.ResponseWriter, r *http.Request) {
+	r.ParseForm()
+	name := r.PostForm.Get("name")
+	email := r.PostForm.Get("email")
+	password := r.PostForm.Get("password")
+	// write the data to the dable
+	err := app.users.Insert(name, email, password)
+	if err != nil {
+		if errors.Is(err, models.ErrDuplicateEmail) {
+			RenderTemplate(w, "signup.page.tmpl", nil)
+		}
+		return
+	}
+	app.sessionManager.Put(r.Context(), "flash", "Signup was successful")
+	http.Redirect(w, r, "/user/login", http.StatusSeeOther)
+}
+
 // create handler for login
 func (app *application) Login(w http.ResponseWriter, r *http.Request) {
 
-	RenderTemplates(w, "./ui/static/html/home.page.tmpl")
+	flash := app.sessionManager.PopString(r.Context(), "flash")
+	data := &templateData{
+		Flash: flash,
+	}
+	RenderTemplate(w, "login.html", data)
 
 }
 
 // create handler for LoginSubmit
 func (app *application) LoginSubmit(w http.ResponseWriter, r *http.Request) {
 
-	RenderTemplates(w, "./ui/static/html/home.page.tmpl")
+	r.ParseForm()
+	email := r.PostForm.Get("email")
+	password := r.PostForm.Get("password")
+	// write the data to the dable
+	id, err := app.users.Authenticate(email, password)
+	if err != nil {
+		if errors.Is(err, models.ErrInvalidCredentials) {
+			RenderTemplate(w, "login.html", nil)
+		}
+		return
+	}
+	// add the user to the session cookie
+	err = app.sessionManager.RenewToken(r.Context())
+	if err != nil {
+		return
+	}
+	// add and authenticate entry
+	app.sessionManager.Put(r.Context(), "authenticatedUserID", id)
+	http.Redirect(w, r, "/poll/reply", http.StatusSeeOther)
 
+}
+
+func (app *application) userLogoutSubmit(w http.ResponseWriter, r *http.Request) {
+	//remove entry from the session manager
+	err := app.sessionManager.RenewToken(r.Context())
+	if err != nil {
+		return
+	}
+	app.sessionManager.Remove(r.Context(), "authenticatedUserID")
+	http.Redirect(w, r, "/user/login", http.StatusSeeOther)
 }
 
 // create handler for SignIn
 func (app *application) SignIn(w http.ResponseWriter, r *http.Request) {
 
-	RenderTemplates(w, "./ui/static/html/home.page.tmpl")
+	RenderTemplates(w, "./static/html/home.page.tmpl")
 
 }
 

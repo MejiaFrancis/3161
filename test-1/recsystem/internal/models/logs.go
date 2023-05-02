@@ -17,6 +17,11 @@ type Log struct {
 	DateTime time.Time // Date and time of the sign-in event
 }
 
+// Setup dependency injection
+type LogModel struct {
+	DB *sql.DB
+
+}
 // InsertLog inserts a log entry into the PostgreSQL database
 func InsertLog(username string) error {
 	// Connect to PostgreSQL database

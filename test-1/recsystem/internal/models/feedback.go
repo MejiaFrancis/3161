@@ -16,6 +16,11 @@ type Feedback struct {
 	Message string // Feedback message
 }
 
+// Setup dependency injection
+type FeedbackModel struct {
+	DB *sql.DB
+}
+
 // InsertFeedback inserts feedback into the PostgreSQL database
 func InsertFeedback(feedback Feedback) error {
 	// Connect to PostgreSQL database

@@ -18,6 +18,11 @@ const (
 	RoleTeacher       Role = "Teacher"
 )
 
+// Setup dependency injection
+type RoleModel struct {
+	DB *sql.DB
+}
+
 func main() {
 	// Prompt user to select a role
 	fmt.Println("Select a role: ")

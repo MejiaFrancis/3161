@@ -23,6 +23,10 @@ type Reservation struct {
 	CreatedAt       time.Time // Timestamp of reservation creation
 }
 
+// Setup dependency injection
+type ReservationModel struct {
+	DB *sql.DB
+}
 // InsertReservation inserts a reservation into the PostgreSQL database
 func InsertReservation(userID int, reservationDate, reservationTime string, duration, peopleCount int, notes string) error {
 	// Connect to PostgreSQL database

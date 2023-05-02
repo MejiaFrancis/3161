@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS users (
   address VARCHAR(255) NOT NULL,
   phone_number bigserial NOT NULL,
   roles_id int NOT NULL,
-  password VARCHAR(255) UNIQUE NOT NULL,
+  password_hash bytea UNIQUE NOT NULL,
   status boolean,
   created_at TIMESTAMP(0) WITH TIME ZONE NOT NULL DEFAULT NOW()
 );
