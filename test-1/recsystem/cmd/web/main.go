@@ -12,8 +12,9 @@ import (
 	"os"
 	"time"
 
-	"github.com/MejiaFrancis/3161/3162/test-1/recsystem/internal/models"
+	//"github.com/MejiaFrancis/3161/3162/test-1/recsystem/internal/models"
 
+	"gibhub.com/MejiaFrancis/3161/3162/test-1/recsystem/internal/models"
 	"github.com/alexedwards/scs/v2"
 	_ "github.com/jackc/pgx/v5/stdlib"
 )

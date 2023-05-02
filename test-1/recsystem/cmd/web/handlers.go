@@ -57,21 +57,21 @@ func (app *application) MessageCreate(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		http.Error(w, "bad request", http.StatusBadRequest)
 		return
-	}
-	email := r.PostForm.Get("email")
-	first_name := r.PostForm.Get("first_name")
-	age := r.PostForm.Get("age")
-	last_name := r.PostForm.Get("last_name")
-	address := r.PostForm.Get("address")
-	phone_number := r.PostForm.Get("phone_number")
-	roles_id := r.PostForm.Get("roles_id")
-	password := r.PostForm.Get("password")
-	log.Printf("%s %s %s %s %s %s %s %d %t\n", email, first_name, last_name, age, address, phone_number, roles_id, password)
-	userid, err := app.user.Insert(email, first_name, last_name, age, address, phone_number, roles_id, password)
-	log.Printf("%s %s %s %s %s %s %s %s %d\n", email, first_name, last_name, age, address, phone_number, roles_id, password, userid)
-	if err != nil {
-		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
-		return
+	// }
+	// email := r.PostForm.Get("email")
+	// first_name := r.PostForm.Get("first_name")
+	// age := r.PostForm.Get("age")
+	// last_name := r.PostForm.Get("last_name")
+	// address := r.PostForm.Get("address")
+	// phone_number := r.PostForm.Get("phone_number")
+	// roles_id := r.PostForm.Get("roles_id")
+	// password := r.PostForm.Get("password")
+	// log.Printf("%s %s %s %s %s %s %s %d %t\n", email, first_name, last_name, age, address, phone_number, roles_id, password)
+	// userid, err := app.user.Insert(email, first_name, last_name, age, address, phone_number, roles_id, password)
+	// log.Printf("%s %s %s %s %s %s %s %s %d\n", email, first_name, last_name, age, address, phone_number, roles_id, password, userid)
+	// if err != nil {
+	// 	http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+	// 	return
 	}
 }
 
@@ -102,7 +102,7 @@ func (app *application) userSignupSubmit(w http.ResponseWriter, r *http.Request)
 }
 
 // create handler for login
-func (app *application) Login(w http.ResponseWriter, r *http.Request) {
+func (app *application) userLogin(w http.ResponseWriter, r *http.Request) {
 
 	flash := app.sessionManager.PopString(r.Context(), "flash")
 	data := &templateData{
@@ -113,7 +113,7 @@ func (app *application) Login(w http.ResponseWriter, r *http.Request) {
 }
 
 // create handler for LoginSubmit
-func (app *application) LoginSubmit(w http.ResponseWriter, r *http.Request) {
+func (app *application) userLoginSubmit(w http.ResponseWriter, r *http.Request) {
 
 	r.ParseForm()
 	email := r.PostForm.Get("email")

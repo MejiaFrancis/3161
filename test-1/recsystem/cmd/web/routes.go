@@ -7,12 +7,13 @@ import (
 	"github.com/justinas/alice"
 )
 
-func (app *application) routes() *httprouter.Router {
+func (app *application) routes() http.Handler {
 	//create multiplexer
 	router := httprouter.New()
 	// create file server
 	fileServer := http.FileServer(http.Dir("./static/"))
 	router.Handler(http.MethodGet, "/static/*filepath", http.StripPrefix("/static", fileServer)) //exclude resource and go to static
+	dynamicMiddleware := alice.New(app.sessionManager.LoadAndSave)
 
 	router.HandlerFunc(http.MethodGet, "/create", app.Greeting) //passing in pointer, say where to find handler func
 	// callback - above shows passing of the address not the func itself
