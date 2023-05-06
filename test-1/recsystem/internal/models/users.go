@@ -79,15 +79,15 @@ func (m *UserModel) Get(userid int64) (*User, error) {
 }
 
 // Creating an Insert Method that will post users entered into the database
-func (m *UserModel) Insert(email string, first_name string, last_name string, age int, address int32, phone_number int16, roles_id int, password string, status string) error {
+func (m *UserModel) Insert(email string, first_name string, password string) error {
 	// let's hash the password
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), 12)
 	if err != nil {
 		return err
 	}
 	query := `
-	            INSERT INTO users(email, first_name, last_name, age, address, phone_number, roles_id, password_hash, status)
-				VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)
+	            INSERT INTO users(first_name, email,  password_hash)
+				VALUES($1, $2, $3,)
 			             `
 
 	// Collect the data fields into a slice
@@ -100,7 +100,7 @@ func (m *UserModel) Insert(email string, first_name string, last_name string, ag
 	// }
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
-	_, err = m.DB.ExecContext(ctx, query, email, first_name, last_name, age, address, phone_number, roles_id, hashedPassword, status)
+	_, err = m.DB.ExecContext(ctx, query, first_name, email, hashedPassword)
 	if err != nil {
 		switch {
 		case err.Error() == `pgx: duplicate key value violates unique constraint "users_email_key"`:

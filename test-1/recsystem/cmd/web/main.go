@@ -23,9 +23,9 @@ import (
 type application struct {
 	errorLog          *log.Logger
 	infoLog           *log.Logger
-	user              models.UserModel
+	users             models.UserModel
 	equipments        models.EquipmentModel
-	role              models.RoleModel
+	roles             models.RoleModel
 	reservations      models.ReservationModel
 	logs              models.LogModel
 	feedback          models.FeedbackModel
@@ -41,7 +41,7 @@ func main() {
 	// Create a flag for specifiying the port number \
 	// when starting the server
 	addr := flag.String("port", ":4000", "HTTP network address")
-	dsn := flag.String("dsn", os.Getenv("RECSYSTEM_DB_DSN"), "PlstgreSQL DSN")
+	dsn := flag.String("dsn", os.Getenv("RECSYSTEM_DB_DSN"), "PostgreSQL DSN")
 	flag.Parse()
 
 	// Create an instance of the connection pool
@@ -64,9 +64,9 @@ func main() {
 	app := &application{
 		errorLog:          errorLog,
 		infoLog:           infoLog,
-		user:              models.UserModel{DB: db},
+		users:             models.UserModel{DB: db},
 		equipments:        models.EquipmentModel{DB: db},
-		role:              models.RoleModel{DB: db},
+		roles:             models.RoleModel{DB: db},
 		reservations:      models.ReservationModel{DB: db},
 		logs:              models.LogModel{DB: db},
 		feedback:          models.FeedbackModel{DB: db},

@@ -2,7 +2,6 @@ package main
 
 import (
 	"errors"
-	"log"
 	"net/http"
 
 	"gibhub.com/MejiaFrancis/3161/3162/test-1/recsystem/internal/models"
@@ -57,21 +56,21 @@ func (app *application) MessageCreate(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		http.Error(w, "bad request", http.StatusBadRequest)
 		return
-	// }
-	// email := r.PostForm.Get("email")
-	// first_name := r.PostForm.Get("first_name")
-	// age := r.PostForm.Get("age")
-	// last_name := r.PostForm.Get("last_name")
-	// address := r.PostForm.Get("address")
-	// phone_number := r.PostForm.Get("phone_number")
-	// roles_id := r.PostForm.Get("roles_id")
-	// password := r.PostForm.Get("password")
-	// log.Printf("%s %s %s %s %s %s %s %d %t\n", email, first_name, last_name, age, address, phone_number, roles_id, password)
-	// userid, err := app.user.Insert(email, first_name, last_name, age, address, phone_number, roles_id, password)
-	// log.Printf("%s %s %s %s %s %s %s %s %d\n", email, first_name, last_name, age, address, phone_number, roles_id, password, userid)
-	// if err != nil {
-	// 	http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
-	// 	return
+		// }
+		// email := r.PostForm.Get("email")
+		// first_name := r.PostForm.Get("first_name")
+		// age := r.PostForm.Get("age")
+		// last_name := r.PostForm.Get("last_name")
+		// address := r.PostForm.Get("address")
+		// phone_number := r.PostForm.Get("phone_number")
+		// roles_id := r.PostForm.Get("roles_id")
+		// password := r.PostForm.Get("password")
+		// log.Printf("%s %s %s %s %s %s %s %d %t\n", email, first_name, last_name, age, address, phone_number, roles_id, password)
+		// userid, err := app.user.Insert(email, first_name, last_name, age, address, phone_number, roles_id, password)
+		// log.Printf("%s %s %s %s %s %s %s %s %d\n", email, first_name, last_name, age, address, phone_number, roles_id, password, userid)
+		// if err != nil {
+		// 	http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		// 	return
 	}
 }
 
@@ -133,7 +132,7 @@ func (app *application) userLoginSubmit(w http.ResponseWriter, r *http.Request) 
 	}
 	// add and authenticate entry
 	app.sessionManager.Put(r.Context(), "authenticatedUserID", id)
-	http.Redirect(w, r, "/poll/reply", http.StatusSeeOther)
+	http.Redirect(w, r, "/user/signup", http.StatusSeeOther)
 
 }
 
@@ -178,3 +177,26 @@ func (app *application) ScanQrCodeSubmit(w http.ResponseWriter, r *http.Request)
 	RenderTemplates(w, "./ui/static/html/home.page.tmpl")
 
 }
+
+func (app *application) dashboard(w http.ResponseWriter, r *http.Request) {
+	flash := app.sessionManager.PopString(r.Context(), "flash")
+	//render
+	data := &templateData{
+		Flash: flash,
+	}
+	RenderTemplate(w, "index.html", data)
+}
+
+// IMPLEMENTING CRUD FOR USERS
+
+// Create User
+func (app *application) createUser(w http.ResponseWriter, r *http.Request) {
+	// remove the entry from the session manager
+	flash := app.sessionManager.PopString(r.Context(), "flash")
+	data := &templateData{
+		Flash: flash,
+	}
+	RenderTemplate(w, "signup.page.tmpl", data)
+}
+
+// Read User
