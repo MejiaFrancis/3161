@@ -5,14 +5,49 @@ import (
 	"net/http"
 
 	"gibhub.com/MejiaFrancis/3161/3162/test-1/recsystem/internal/models"
+	"github.com/justinas/nosurf"
 )
+
+// handler for manage equipment
+func (app *application) ManageEquipment(w http.ResponseWriter, r *http.Request) {
+
+	data := &templateData{
+		CSRFToken: nosurf.Token(r), //added for authentication
+	}
+	RenderTemplate(w, "equipment-management.page.tmpl", data)
+
+}
+
+func (app *application) chooseRoleShow(w http.ResponseWriter, r *http.Request) {
+	flash := app.sessionManager.PopString(r.Context(), "flash")
+	data := &templateData{
+		Flash:     flash,
+		CSRFToken: nosurf.Token(r),
+	}
+	RenderTemplate(w, "role.page.tmpl", data)
+}
+
+func (app *application) chooseRoleSubmit(w http.ResponseWriter, r *http.Request) {
+	// get the four options
+	r.ParseForm()
+	RoleStutent := r.PostForm.Get("RoleStudent")
+	RoleAdministrator := r.PostForm.Get("RoleAdministrator")
+	RoleTeacher := r.PostForm.Get("RoleTeacher")
+
+	// save the roles
+	_, err := app.roles.Insert(RoleStutent, RoleAdministrator, RoleTeacher)
+	if err != nil {
+		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+	}
+	http.Redirect(w, r, "/user/login", http.StatusSeeOther)
+}
 
 // include --about
 // include --home
 // create handler for greeting
 func (app *application) Greeting(w http.ResponseWriter, r *http.Request) {
 
-	RenderTemplates(w, "./static/html/poll.page.tmpl")
+	RenderTemplates(w, "./ui/html/viewequipment.html")
 	//RenderTemplate(w, "home.page.tmpl", nil)
 	// w.Write([]byte("Welcome to my page."))
 	//question, err := app.question.Get()
@@ -78,7 +113,8 @@ func (app *application) userSignup(w http.ResponseWriter, r *http.Request) {
 	// remove the entry from the session manager
 	flash := app.sessionManager.PopString(r.Context(), "flash")
 	data := &templateData{
-		Flash: flash,
+		Flash:     flash,
+		CSRFToken: nosurf.Token(r),
 	}
 	RenderTemplate(w, "signup.page.tmpl", data)
 }
@@ -105,7 +141,8 @@ func (app *application) userLogin(w http.ResponseWriter, r *http.Request) {
 
 	flash := app.sessionManager.PopString(r.Context(), "flash")
 	data := &templateData{
-		Flash: flash,
+		Flash:     flash,
+		CSRFToken: nosurf.Token(r),
 	}
 	RenderTemplate(w, "login.html", data)
 
@@ -132,7 +169,7 @@ func (app *application) userLoginSubmit(w http.ResponseWriter, r *http.Request) 
 	}
 	// add and authenticate entry
 	app.sessionManager.Put(r.Context(), "authenticatedUserID", id)
-	http.Redirect(w, r, "/user/signup", http.StatusSeeOther)
+	http.Redirect(w, r, "/user/admin/manage-equipment", http.StatusSeeOther)
 
 }
 

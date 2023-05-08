@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Equipment Manager</title>
+  </head>
+  <body>
+    <h1>Equipment Manager</h1>
+
+    <h2>Add Equipment</h2>
+    <form method="post" action="/add">
+      <label for="name">Name:</label>
+      <input type="text" name="name"><br>
+
+      <label for="image">Image:</label>
+      <input type="file" name="image"><br>
+
+      <label for="equipment_type_id">Equipment Type ID:</label>
+      <input type="number" name="equipment_type_id"><br>
+
+      <label for="status">Status:</label>
+      <input type="checkbox" name="status" value="1"><br>
+
+      <label for="availability">Availability:</label>
+      <input type="checkbox" name="availability" value="1"><br>
+
+      <input type="submit" value="Add">
+    </form>
+
+    <hr>
+
+    <h2>Available Equipment</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Image</th>
+          <th>Equipment Type ID</th>
+          <th>Status</th>
+          <th>Availability</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{range .Equipment}}
+        <tr>
+          <td>{{.Name}}</td>
+          <td>{{.Image}}</td>
+          <td>{{.EquipmentTypeID}}</td>
+          <td>{{.Status}}</td>
+          <td>{{.Availability}}</td>
+          <td>
+            <form method="post" action="/delete">
+              <input type="hidden" name="equipment_id" value="{{.EquipmentID}}">
+              <input type="submit" value="Delete">
+            </form>
+            <form method="get" action="/edit">
+              <input type="hidden" name="equipment_id" value="{{.EquipmentID}}">
+              <input type="submit" value="Edit">
+            </form>
+          </td>
+        </tr>
+        {{end}}
+      </tbody>
+    </table>
+
+    <hr>
+
+    <h2>Edit Equipment</h2>
+    <form method="post" action="/update">
+      <input type="hidden" name="equipment_id" value="{{.Equipment.EquipmentID}}">
+      <label for="name">Name:</label>
+      <input type="text" name="name" value="{{.Equipment.Name}}"><br>
+
+      <label for="image">Image:</label>
+      <input type="file" name="image"><br>
+
+      <label for="equipment_type_id">Equipment Type ID:</label>
+      <input type="number" name="equipment_type_id" value="{{.Equipment.EquipmentTypeID}}"><br>
+
+      <label for="status">Status:</label>
+      <input type="checkbox" name="status" value="1" {{if .Equipment.Status}}checked{{end}}><br>
+
+      <label for="availability">Availability:</label>
+      <input type="checkbox" name="availability" value="1" {{if .Equipment.Availability}}checked{{end}}><br>
+
+      <input type="submit" value="Update">
+    </form>
+  </body>
+</html>

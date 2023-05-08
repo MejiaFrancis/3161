@@ -1,0 +1,22 @@
+{{template "base" .}}
+{{define "content"}}
+<form action="/user/role" method="POST" novalidate>
+        <p>Please select your Role to Login:</p>
+        <div>
+      <input type="radio" id="html" name="user_role" value="RoleStudent">
+      <label for="RoleStudent">RoleStudent</label><br>
+    </div>
+    <div>
+      <input type="radio" id="css" name="user_role" value="RoleAdministrator">
+      <label for="RoleAdministrator">RoleAdministrator</label><br>
+    </div>
+    <div>
+      <input type="radio" id="javascript" name="user_role" value="RoleTeacher">
+      <label for="RoleTeacher">RoleTeacher</label>
+      <br> 
+    </div> 
+  <div>
+    <input type="submit" value="OK" />
+  </div>
+</form>
+{{ end }}

@@ -11,9 +11,9 @@ func (app *application) routes() http.Handler {
 	//create multiplexer
 	router := httprouter.New()
 	// create file server
-	fileServer := http.FileServer(http.Dir("./static/"))
-	router.Handler(http.MethodGet, "/static/*filepath", http.StripPrefix("/static", fileServer)) //exclude resource and go to static
-	dynamicMiddleware := alice.New(app.sessionManager.LoadAndSave)
+	fileServer := http.FileServer(http.Dir("./ui/html/"))
+	router.Handler(http.MethodGet, "/html/*filepath", http.StripPrefix("/html", fileServer)) //exclude resource and go to html
+	dynamicMiddleware := alice.New(app.sessionManager.LoadAndSave, noSurf)
 
 	router.HandlerFunc(http.MethodGet, "/create", app.Greeting) //passing in pointer, say where to find handler func
 	// callback - above shows passing of the address not the func itself
@@ -33,9 +33,13 @@ func (app *application) routes() http.Handler {
 	router.Handler(http.MethodGet, "/user/signup", dynamicMiddleware.ThenFunc(app.userSignup))
 	router.Handler(http.MethodPost, "/user/signup", dynamicMiddleware.ThenFunc(app.userSignupSubmit))
 	router.Handler(http.MethodGet, "/user/login", dynamicMiddleware.ThenFunc(app.userLogin))
+	router.Handler(http.MethodGet, "/user/role", dynamicMiddleware.ThenFunc(app.chooseRoleShow))
+	router.Handler(http.MethodPost, "/user/role", dynamicMiddleware.ThenFunc(app.chooseRoleSubmit))
 	router.Handler(http.MethodPost, "/user/login", dynamicMiddleware.ThenFunc(app.userLoginSubmit))
 	router.Handler(http.MethodPost, "/user/logout", dynamicMiddleware.ThenFunc(app.userLogoutSubmit))
 
+	protected := dynamicMiddleware.Append(app.requireAuthenticationMiddleware)
+	router.Handler(http.MethodGet, "/user/admin/manage-equipment", protected.ThenFunc(app.ManageEquipment))
 	// tidy up the middleware chain
 	standardMiddleware := alice.New(app.RecoverPanicMiddleware, app.logRequestMiddleware, securityHeadersMiddleware)
 	return standardMiddleware.Then(router)
